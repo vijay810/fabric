@@ -1,0 +1,34 @@
+<p>product works!</p>
+
+<div class="toolbar">
+    <button (click)="selectOption('text')">Add Text</button>
+    <button (click)="selectOption('upload')">Upload Image</button>
+    <button (click)="selectOption('gallery')">Gallery</button>
+    <button (click)="clearCanvas()">Clear</button>
+
+    <button (click)="addRectangle()">Rectangle</button>
+    <button (click)="addCircle()">Circle</button>
+    <button (click)="addTriangle()">Triangle</button>
+
+    <button (click)="bringForward()">Bring Front</button>
+    <button (click)="sendBack()">Send Back</button>
+    <button (click)="deleteSelected()">Delete</button>
+
+</div>
+
+<div *ngIf="selectedOption === 'text'">
+    <input [(ngModel)]="textValue" placeholder="Enter text" />
+    <button (click)="addText()">Add</button>
+</div>
+
+<div *ngIf="selectedOption === 'upload'">
+    <input type="file" accept="image/*" (change)="onImageUpload($event)" />
+</div>
+
+<div *ngIf="selectedOption === 'gallery'" class="gallery">
+    <img *ngFor="let img of galleryImages" [src]="img" (click)="addGalleryImage(img)" />
+</div>
+
+<div class="canvas-wrapper">
+    <canvas #fabricCanvas width="200" height="200"></canvas>
+</div>

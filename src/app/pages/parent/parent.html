@@ -1,0 +1,9 @@
+<p>parent works!</p>
+<!-- parent to child pass data -->
+<!-- <app-child [userName]="parentName"></app-child> -->
+
+
+<!-- child to parent pass data -->
+<app-child (sendData)="getChildData($event)"></app-child>
+
+<p>Data from Child: {{ receivedData }}</p>

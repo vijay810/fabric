@@ -1,0 +1,141 @@
+<div class="form-wrapper">
+
+    <h2>Signal-Based User Form</h2>
+
+    <!-- NAME -->
+    <div class="row">
+        <div class=" col-sm-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" #nameInput [value]="name()" (input)="name.set(nameInput.value)"
+                (blur)="nameTouched.set(true)" />
+            <!-- <span class="error" *ngIf="nameTouched() && !nameValid()">Minimum 3 characters required</span> -->
+            <!-- Required Error -->
+            <div class="text-danger" *ngIf="nameTouched() && !name().trim()">Name is required</div>
+
+            <!-- Min Length Error -->
+            <div class="text-danger" *ngIf="nameTouched() && name().trim().length > 0 && !nameValid()">
+                Minimum 3 characters required
+            </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="col-sm-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" #emailInput [value]="email()" (input)="email.set(emailInput.value)"
+                (blur)="emailTouched.set(true)" />
+
+            <div>
+                <span class="text-danger" *ngIf="emailTouched() && !email()">
+                    Email is required
+                </span>
+                <span class="text-danger" *ngIf="emailTouched() && email() && !emailValid()">
+                    Email is invalid
+                </span>
+            </div>
+        </div>
+
+        <!-- AGE -->
+        <div class="col-sm-3">
+            <label class="form-label">Age</label>
+            <input class="form-control" #ageInput type="number" [value]="age()" (input)="age.set(+ageInput.value)"
+                (blur)="ageTouched.set(true)" />
+            <div>
+                <span class="text-danger" *ngIf="ageTouched() && !age()">
+                    Age is required
+                </span>
+                <span class="text-danger" *ngIf="ageTouched() && age() && !ageValid()">
+                    Age must be 1–120
+                </span>
+            </div>
+        </div>
+
+        <!-- DATE OF BIRTH -->
+        <div class="col-sm-3">
+            <label class="form-label">Date of Birth</label>
+            <input class="form-control" #dobInput type="date" [value]="dob()" (input)="dob.set(dobInput.value)"
+                (blur)="dobTouched.set(true)" />
+            <!-- <span class="error" *ngIf="dobTouched() && !dobValid()">Date of Birth is required</span> -->
+            <div>
+                <span class="text-danger" *ngIf="dobTouched() && !dob()">
+                    Date of Birth is required
+                </span>
+
+                <!-- Should be before today -->
+                <span class="text-danger" *ngIf="dobTouched() && dob() && !dobValid()">
+                    Please select a valid date before today
+                </span>
+            </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="col-sm-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" #addressInput [value]="address()" (input)="address.set(addressInput.value)"
+                (blur)="addressTouched.set(true)">
+    </textarea>
+            <span class="error" *ngIf="addressTouched() && !addressValid()">Address is required</span>
+        </div>
+
+        <!-- GENDER -->
+        <div class="col-sm-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" #genderSelect (change)="gender.set(genderSelect.value)"
+                (blur)="genderTouched.set(true)">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <span class="error" *ngIf="genderTouched() && !genderValid()">Gender is required</span>
+        </div>
+
+        <!-- STATUS -->
+        <div class="col-sm-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" #statusSelect (change)="status.set(statusSelect.value)"
+                (blur)="statusTouched.set(true)">
+                <option value="">Select</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+            <span class="error" *ngIf="statusTouched() && !statusValid()">Status is required</span>
+        </div>
+
+        <!-- HOBBIES -->
+        <div class="hobbies-section col-sm-3">
+            <div class="row mb-0">
+                <div class="col-sm-9 col-9">
+                    <label class="form-label">Hobbies</label>
+                    <input class="form-control" #hobbyInput placeholder="Add hobby" />
+                </div>
+                <div class="col-sm-3 col-3 mt-auto ps-0">
+                    <button class="btn btn-primary" type="button"
+                        (click)="addHobby(hobbyInput.value); hobbyInput.value=''; hobbiesTouched.set(true)">Add</button>
+                </div>
+                <div class="col-sm-12" >
+                    <div class="hobbies-grid" *ngFor="let h of hobbies(); let i = index">
+                        <div>
+                            <span>{{ h }}</span>
+                            <button class="btn btn-sm btn-danger ms-1 py-0 px-1" type="button"
+                                (click)="removeHobby(i)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="error" *ngIf="hobbiesTouched() && !hobbiesValid()">Add at least one hobby</span>
+        </div>
+
+
+
+
+    </div>
+    <!-- SUBMIT BUTTON -->
+    <div class="mt-5">
+        <button class="btn btn-primary" type="button" [disabled]="!formValid()" (click)="submit()">Submit</button>
+    </div>
+
+</div>
+
+<div class="text-message">
+    <span>Lorem, ipsum dolor sit Lorem ipsum dolor sit amet. consectetur adipisicing elit.</span>
+</div>

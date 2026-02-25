@@ -1,0 +1,35 @@
+.form-label{
+    margin-bottom: 0px;
+}
+.error{
+    color: red;
+}
+.hobbies-grid{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+}
+
+.text-message {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: 600;
+    color: #233;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px #b1aeae;
+}
+
+.text-message span {
+    display: inline-block;
+    clip-path: inset(0 100% 0 0);
+
+    // animation: revealLTR 2s ease forwards;
+    animation: revealLTR 5s linear forwards;
+}
+
+@keyframes revealLTR {
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}

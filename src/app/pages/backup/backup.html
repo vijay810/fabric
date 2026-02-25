@@ -1,0 +1,83 @@
+<div class="shirt-controls">
+    <label>
+        T-Shirt Color:
+        <select [(ngModel)]="selectedShirtColor">
+            @for(c of shirtColors; track c){
+            <option [value]="c.value">
+                {{ c.name }}
+            </option>
+            }
+        </select>
+    </label>
+
+    <label>
+        T-Shirt Size:
+        <select [(ngModel)]="selectedShirtSize" (change)="updateShirt()">
+            @for(s of shirtSizes; track s){
+            <option [value]="s">
+                {{ s }}
+            </option>
+            }
+        </select>
+    </label>
+</div>
+
+<div class="toolbar">
+    <button (click)="selectOption('text')">Add Text</button>
+    <button (click)="selectOption('upload')">Upload Image</button>
+    <button (click)="selectOption('gallery')">Gallery</button>
+    <button (click)="clearCanvas()">Clear</button>
+    <button (click)="deleteSelected()">Delete Selected</button>
+    <button (click)="exportToPNG()">Export PNG</button>
+</div>
+@if(selectedOption === 'text'){
+<div>
+    <input [(ngModel)]="textValue" placeholder="Enter text">
+    <button (click)="addText()">Add</button>
+</div>
+
+}
+@if(showStyleOptions){
+<div class="options-wrapper">
+    <h4>Colors</h4>
+    <div class="scroll-row">
+        @for(c of colors; track c){
+        <div class="circle" [style.background]="c" (click)="applyColor(c)"></div>
+        }
+
+    </div>
+
+    <h4>Fonts</h4>
+    <div class="scroll-row">
+        @for(f of fontStyles; track f){
+        <div class="font-card" (click)="applyFont(f)">
+            {{ f }}
+        </div>
+        }
+
+    </div>
+</div>
+}
+
+@if(selectedOption === 'upload'){
+<div>
+    <input type="file" (change)="onImageUpload($event)">
+</div>
+}
+
+@if(selectedOption === 'gallery'){
+<div class="gallery">
+    @for(img of galleryImages; track img){
+    <img [src]="img" (click)="addGalleryImage(img)">
+    }
+</div>
+}
+
+
+<div class="shirt-preview">
+    <img [src]="getShirtImage()" class="shirt-base">
+
+    <div class="print-area">
+        <canvas #fabricCanvas></canvas>
+    </div>
+</div>

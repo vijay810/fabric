@@ -1,0 +1,46 @@
+<div class="toolbar">
+    <button class="btn btn-primary" (click)="selectOption('text')">Add Text</button>
+    <button class="btn btn-primary" (click)="selectOption('upload')">Upload Image</button>
+    <button class="btn btn-primary" (click)="selectOption('gallery')">Gallery</button>
+    <button class="btn btn-primary" (click)="clearCanvas()">Clear</button>
+    <button class="btn btn-danger" (click)="deleteSelected()">Delete Selected</button>
+
+</div>
+
+<!-- TEXT INPUT -->
+<div class="mt-3" *ngIf="selectedOption === 'text'">
+    <input [(ngModel)]="textValue" placeholder="Enter text" />
+    <button (click)="addText()">Add</button>
+</div>
+
+<!-- COLORS + FONTS SCROLL MENU -->
+<div *ngIf="showStyleOptions" class="options-wrapper">
+
+    <h4>Colors</h4>
+    <div class="scroll-row">
+        <div class="circle" *ngFor="let c of colors" [style.background]="c" (click)="applyColor(c)">
+        </div>
+    </div>
+
+    <h4>Fonts</h4>
+    <div class="scroll-row">
+        <div class="font-card" *ngFor="let f of fontStyles" (click)="applyFont(f)">
+            {{ f }}
+        </div>
+    </div>
+
+</div>
+
+<!-- UPLOAD -->
+<div *ngIf="selectedOption === 'upload'">
+    <input type="file" accept="image/*" (change)="onImageUpload($event)" />
+</div>
+
+<!-- GALLERY -->
+<div *ngIf="selectedOption === 'gallery'" class="gallery">
+    <img *ngFor="let img of galleryImages" [src]="img" (click)="addGalleryImage(img)" />
+</div>
+
+<div class="canvas-wrapper">
+    <canvas #fabricCanvas width="200" height="200"></canvas>
+</div>

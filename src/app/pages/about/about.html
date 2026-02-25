@@ -1,0 +1,64 @@
+@if(loadingflag){<div class="d-grid h-100">
+    <div class="d-flex align-items-center justify-content-center">
+        loading...!
+    </div>
+</div>}@else{
+<div class="d-flex justify-content-between w-100">
+    <p class="mb-0">starting side</p>
+    <p class="mb-0 mx-auto">center</p>
+</div>
+<h2>Employee List</h2>
+
+@for (da of employee; track da) {
+<div class="card">
+    <p><b>ID:</b> {{ da.id }}</p>
+    <p><b>Name:</b> {{ da.employee_name }}</p>
+    <p><b>Salary:</b> {{ da.employee_salary }}</p>
+    <p><b>Age:</b> {{ da.employee_age }}</p>
+</div>
+}
+
+<p>about works!</p>
+<h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, voluptas fuga. Nesciunt, asperiores neque aliquam
+</h1>
+<div>
+    <form [formGroup]="myform">
+        <div class="row mb-2">
+            <div class="col-sm-2">
+                <label class="form-label" for="">Name</label>
+                <input class="form-control" type="text" formControlName="name">
+            </div>
+            <div class="col-sm-2 mt-auto">
+                <button type="submit" class="btn btn-primary" (click)="searchbtn()">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+<table class="table table-bordered border-striped table-hover">
+    <thead>
+        <tr>
+            <th>Sl.no</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(noData){
+        <tr>
+            <td colspan="3" class="text-center text-danger fw-bold">
+                Not existed
+            </td>
+        </tr>
+        } @else {
+        @for(data of getdata; track $index){
+        <tr>
+            <td>{{$index + 1}}</td>
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+        </tr>
+        }
+        }
+    </tbody>
+</table>
+}

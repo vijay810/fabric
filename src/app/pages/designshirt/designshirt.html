@@ -1,0 +1,59 @@
+<div class="shirt-controls">
+    <label>
+        T-Shirt Color:
+        <select [(ngModel)]="selectedShirtColor">
+            <option *ngFor="let c of shirtColors" [value]="c.value">{{ c.name }}</option>
+        </select>
+    </label>
+
+    <label>
+        T-Shirt Size:
+        <select [(ngModel)]="selectedShirtSize" (change)="updateShirt()">
+            <option *ngFor="let s of shirtSizes" [value]="s">{{ s }}</option>
+        </select>
+    </label>
+
+    <button (click)="flipShirt()">Flip {{ isFront ? 'Front' : 'Back' }}</button>
+</div>
+
+<div class="toolbar">
+    <button (click)="selectOption('text')">Add Text</button>
+    <button (click)="selectOption('upload')">Upload Image</button>
+    <button (click)="selectOption('gallery')">Gallery</button>
+    <button (click)="clearCanvas()">Clear</button>
+    <button (click)="deleteSelected()">Delete Selected</button>
+    <button (click)="exportToPNG()">Export PNG</button>
+    
+</div>
+
+<div *ngIf="selectedOption === 'text'">
+    <input [(ngModel)]="textValue" placeholder="Enter text">
+    <button (click)="addText()">Add</button>
+</div>
+
+<div *ngIf="showStyleOptions">
+    <h4>Colors</h4>
+    <div class="scroll-row">
+        <div class="circle" *ngFor="let c of colors" [style.background]="c" (click)="applyColor(c)"></div>
+    </div>
+
+    <h4>Fonts</h4>
+    <div class="scroll-row">
+        <div class="font-card" *ngFor="let f of fontStyles" (click)="applyFont(f)">{{ f }}</div>
+    </div>
+</div>
+
+<div *ngIf="selectedOption === 'upload'">
+    <input type="file" (change)="onImageUpload($event)">
+</div>
+
+<div *ngIf="selectedOption === 'gallery'" class="gallery">
+    <img *ngFor="let img of galleryImages" [src]="img" (click)="addGalleryImage(img)">
+</div>
+
+<div class="shirt-preview">
+    <img [src]="getShirtImage()" class="shirt-base">
+    <div class="print-area">
+        <canvas #fabricCanvas></canvas>
+    </div>
+</div>

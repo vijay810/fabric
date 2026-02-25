@@ -1,0 +1,75 @@
+@if(loadingflag){
+    <div class="d-grid h-100">
+        <div class="d-flex align-items-center justify-content-center">
+            loading...!
+        </div>
+    </div>
+}@else {
+<div class="aligncss">
+    <p>Hi</p>
+    <p>Hello</p>
+    <p>by</p>
+</div>
+
+<div>
+    <form [formGroup]="myform">
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="">Enter Name</label>
+                <input type="text" class="form-control" formControlName="name" />
+                @if(myform.get('name')?.touched && myform.get('name')?.errors?.['required']){<span>name is Required</span>}
+            </div>
+            <div class="col-sm-3">
+                <label for="">age</label>
+                <input type="text" class="form-control" formControlName="age" />
+                @if(myform.get('name')?.touched && myform.get('name')?.errors?.['required']){
+                    age is required
+                }
+            </div>
+            <div class="col-sm-3">
+                <label>Description</label>
+                <input type="text" class="form-control" formControlName="desc"/>
+                @if(myform.get('desc')?.touched && myform.get('name')?.errors?.['required']){ description is required}
+            </div>
+            <div class="col-sm-3">
+                <label for="">Status</label>
+                <select class="form-select" formControlName="status">
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary" (click)="submitBtn()">Submit</button>
+        </div>
+    </form>
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sl.no</th>
+                <th>Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of dataall; track $index) {
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+ 
+</div>
+
+}

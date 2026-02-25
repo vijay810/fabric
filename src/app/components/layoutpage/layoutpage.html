@@ -1,0 +1,15 @@
+<div class="main-layout" [class.sidebar-open]="isSidebarOpen">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="right-container">
+        <app-header (menuClick)="toggleSidebar()"></app-header>
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <app-footer></app-footer>
+    </div>
+</div>

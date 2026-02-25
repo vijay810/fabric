@@ -1,0 +1,26 @@
+<p>employeedata works!</p>
+<h2>Employee List</h2>
+<form [formGroup]="searchForm">
+    <div class="row">
+        <div class="col-sm-2">
+            <label for="">Name</label>
+            <input type="text" formControlName="name">
+        </div>
+        <div class="col-sm-2">
+            <label for="">Username</label>
+            <input type="text" formControlName="username">
+        </div>
+    </div>
+    <div>
+        <button type="button" (click)="submitbtn()">Submit</button>
+    </div>
+</form>
+
+@for (da of getData; track da) {
+<div class="card">
+    <p><b>ID:</b> {{ da.id }}</p>
+    <p><b>Name:</b> {{ da.name}}</p>
+    <p><b>email:</b> {{ da.email }}</p>
+    <p><b>Username:</b>{{da.username}}</p>
+</div>
+}
